@@ -1,15 +1,18 @@
 package ar.unrn.tp.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ar.unrn.tp.excepciones.EmptyStringException;
 import ar.unrn.tp.excepciones.InvalidEmailException;
 import ar.unrn.tp.excepciones.InvalidIDException;
-import ar.unrn.tp.helper.EmailValidator;
 
 public class Cliente {
 	private String nombre;
 	private String apellido;
 	private int dni;
-	private String email;
+	private DireccionEmail email;
+	private List<TarjetaCredito> tarjetas;
 	
 	public Cliente(String nombre, String apellido, int dni, String email) throws EmptyStringException, InvalidIDException, InvalidEmailException {
 		if(nombre==null||nombre.isEmpty())
@@ -18,13 +21,19 @@ public class Cliente {
 			throw new EmptyStringException("Debe ingresar un apellido");
 		if(dni<0||dni>99999999)
 			throw new InvalidIDException("Debe ingresar un dni válido");
-		if(!EmailValidator.validarMail(email))
+		
+		DireccionEmail direccionEmail = new DireccionEmail(email);
+		
+		if(direccionEmail.esValido())
 			throw new InvalidEmailException("Debe ingresar un email válido");
 		
 		this.nombre=nombre.trim();
 		this.apellido=apellido.trim();
 		this.dni=dni;
-		this.email=email.trim();
+		this.email=direccionEmail;
+		this.tarjetas = new ArrayList<TarjetaCredito>();
 	}
+	
+	
 	
 }

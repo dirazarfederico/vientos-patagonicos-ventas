@@ -22,4 +22,16 @@ public class Producto {
 		if(categoria==null||categoria.isEmpty())
 			throw new EmptyStringException("El producto debe tener una categoria");
 	}
+	
+	public long codigo() {
+		return this.codigo;
+	}
+	
+	public float precio() {
+		return this.precio;
+	}
+	
+	public String descripcion() {
+		return this.descripcion;
+	}
 }
