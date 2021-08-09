@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Carrito {
-	private Cliente cliente;
 	private List<ProductoVendido> productos;
 	
-	public Carrito(Cliente cliente) {
-		this.cliente=cliente;
+	public Carrito() {
 		productos=new ArrayList<ProductoVendido>();
 	}
 	
@@ -19,9 +17,5 @@ public class Carrito {
 	
 	public List<ProductoVendido> productos() {
 		return this.productos;
-	}
-	
-	public Cliente cliente() {
-		return this.cliente;
 	}
 }

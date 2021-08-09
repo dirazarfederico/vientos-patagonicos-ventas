@@ -2,7 +2,7 @@ package ar.unrn.tp.modelo;
 
 public class ProductoVendido {
 	private long codigoProducto;
-	private float precioProducto;
+	private double precioProducto;
 	private String descripcionProducto;
 	private int cantidad;
 	

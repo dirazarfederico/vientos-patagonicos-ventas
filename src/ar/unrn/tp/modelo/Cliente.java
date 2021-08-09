@@ -13,6 +13,7 @@ public class Cliente {
 	private int dni;
 	private DireccionEmail email;
 	private List<TarjetaCredito> tarjetas;
+	private Carrito carrito;
 	
 	public Cliente(String nombre, String apellido, int dni, String email) throws EmptyStringException, InvalidIDException, InvalidEmailException {
 		if(nombre==null||nombre.isEmpty())
@@ -24,16 +25,35 @@ public class Cliente {
 		
 		DireccionEmail direccionEmail = new DireccionEmail(email);
 		
-		if(direccionEmail.esValido())
+		if(!direccionEmail.esValido())
 			throw new InvalidEmailException("Debe ingresar un email válido");
 		
-		this.nombre=nombre.trim();
-		this.apellido=apellido.trim();
-		this.dni=dni;
-		this.email=direccionEmail;
+		this.nombre = nombre.trim();
+		this.apellido = apellido.trim();
+		this.dni = dni;
+		this.email = direccionEmail;
 		this.tarjetas = new ArrayList<TarjetaCredito>();
+		this.carrito = new Carrito();
 	}
 	
+	public Carrito carrito() {
+		return this.carrito;
+	}
 	
+	public boolean añadirAlCarrito(Producto prod, int cantidad) {
+		return this.carrito.añadirProducto(prod, cantidad);
+	}
+	
+	public void pagar(TarjetaCredito tarjeta) {
+		tarjetas.get(tarjetas.indexOf(tarjeta));
+	}
+	
+	public boolean añadirTarjeta(TarjetaCredito tarjeta) {
+		return this.tarjetas.add(tarjeta);
+	}
+	
+	public boolean eliminarTarjeta(TarjetaCredito tarjeta) {
+		return this.tarjetas.remove(tarjeta);
+	}
 	
 }

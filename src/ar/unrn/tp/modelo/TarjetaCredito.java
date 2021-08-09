@@ -12,4 +12,18 @@ public class TarjetaCredito {
 	public String empresa() {
 		return this.empresa;
 	}
+	
+	public boolean mismaEmpresa(TarjetaCredito otraTarjeta) {
+		return this.empresa.equals(otraTarjeta.empresa);
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		TarjetaCredito otraTarjeta = (TarjetaCredito) o;
+		if(this.empresa.equals(otraTarjeta.empresa)) {
+			if(this.numero==otraTarjeta.numero)
+				return true;
+		}
+		return false;
+	}
 }
