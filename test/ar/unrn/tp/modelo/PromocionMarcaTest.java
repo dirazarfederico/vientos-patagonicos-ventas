@@ -25,7 +25,7 @@ public class PromocionMarcaTest {
 		
 		//verify
 		Assert.assertThrows(DateOverlapException.class, () -> {
-			PromocionMarca promoMarca = new PromocionMarca(inicio, fin, marca);
+			PromocionMarca promoMarca = new PromocionMarca(inicio, fin, 0.05, marca);
 		});
 	}
 	

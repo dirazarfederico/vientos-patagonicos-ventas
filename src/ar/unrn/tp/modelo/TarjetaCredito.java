@@ -5,8 +5,8 @@ public class TarjetaCredito {
 	private String empresa;
 	
 	public TarjetaCredito(long numero, String empresa) {
-		this.numero=numero;
-		this.empresa=empresa;
+		this.numero = numero;
+		this.empresa = empresa;
 	}
 	
 	public String empresa() {

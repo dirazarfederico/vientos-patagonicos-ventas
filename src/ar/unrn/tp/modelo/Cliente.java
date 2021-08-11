@@ -13,7 +13,6 @@ public class Cliente {
 	private int dni;
 	private DireccionEmail email;
 	private List<TarjetaCredito> tarjetas;
-	private Carrito carrito;
 	
 	public Cliente(String nombre, String apellido, int dni, String email) throws EmptyStringException, InvalidIDException, InvalidEmailException {
 		if(nombre==null||nombre.isEmpty())
@@ -33,19 +32,6 @@ public class Cliente {
 		this.dni = dni;
 		this.email = direccionEmail;
 		this.tarjetas = new ArrayList<TarjetaCredito>();
-		this.carrito = new Carrito();
-	}
-	
-	public Carrito carrito() {
-		return this.carrito;
-	}
-	
-	public boolean añadirAlCarrito(Producto prod, int cantidad) {
-		return this.carrito.añadirProducto(prod, cantidad);
-	}
-	
-	public void pagar(TarjetaCredito tarjeta) {
-		tarjetas.get(tarjetas.indexOf(tarjeta));
 	}
 	
 	public boolean añadirTarjeta(TarjetaCredito tarjeta) {

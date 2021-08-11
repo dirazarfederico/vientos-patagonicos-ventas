@@ -6,7 +6,7 @@ import ar.unrn.tp.excepciones.IllegalNumberException;
 public class PromocionTarjeta extends Promocion {
 	private TarjetaCredito tarjeta;
 	
-	public PromocionTarjeta(FechaHora inicio, FechaHora fin, double descuento, TarjetaCredito tarjeta) throws DateOverlapException, IllegalNumberException {
+	public PromocionTarjeta(FechaHora inicio, FechaHora fin, double descuento, TarjetaCredito tarjeta) throws DateOverlapException, IllegalNumberException, IllegalArgumentException {
 		super(inicio, fin, descuento);
 		if(tarjeta==null)
 			throw new IllegalArgumentException("Se requiere de una tarjeta para dar de alta una promoción de tarjeta");

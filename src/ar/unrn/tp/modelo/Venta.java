@@ -9,11 +9,12 @@ public class Venta {
 	private TarjetaCredito tarjeta;
 	private double total;
 	
-	public Venta(Cliente cliente, TarjetaCredito tarjeta) {
+	public Venta(List<ProductoVendido> productos, Cliente cliente, TarjetaCredito tarjeta, double total) {
 		this.cliente = cliente;
-		this.detalle = cliente.carrito().productos();
+		this.detalle = productos;
 		this.tarjeta = tarjeta;
 		this.fechaHora = new FechaHora();
+		this.total = total;
 	}
 	
 }
