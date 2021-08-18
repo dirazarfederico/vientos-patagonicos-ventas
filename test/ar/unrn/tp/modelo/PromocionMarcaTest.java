@@ -7,15 +7,16 @@ import org.junit.jupiter.api.Test;
 
 import ar.unrn.tp.excepciones.DateOverlapException;
 import ar.unrn.tp.excepciones.EmptyStringException;
+import ar.unrn.tp.excepciones.IllegalNumberException;
 
 public class PromocionMarcaTest {
 
 	@Test
-	public void promocionFechasSolapadas() throws ParseException, EmptyStringException, DateOverlapException {
+	public void promocionFechasSolapadas() throws ParseException, EmptyStringException, DateOverlapException, IllegalArgumentException, IllegalNumberException {
 		
 		//set up
 		FechaHora inicio, fin;
-		Marca marca = new Marca("Nike");
+		String marca = "Nike";
 		
 		inicio = new FechaHora("09/08/2021 12:00");
 		fin = new FechaHora("08/08/2021 13:58");

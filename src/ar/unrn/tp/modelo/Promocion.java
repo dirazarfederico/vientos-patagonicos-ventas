@@ -25,8 +25,10 @@ public abstract class Promocion {
 		return hoy.despues(fechaInicio) && hoy.antes(fechaFin);
 	}
 	
-	public double calcularDescuento(double monto) {
-		return monto * this.descuento;
+	public abstract boolean valido(Object o);
+	
+	public double calcularDescuento(Object o, double monto) {
+		return vigente() && valido(o) ? monto * descuento : monto;
 	}
 
 }

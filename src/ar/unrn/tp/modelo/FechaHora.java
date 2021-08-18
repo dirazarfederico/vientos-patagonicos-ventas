@@ -10,13 +10,13 @@ import java.util.Date;
 public class FechaHora implements Comparable<FechaHora> {
 	private static final String FORMATOFECHA = "dd/MM/yyyy";
 	private static final String FORMATOFECHAHORA = "dd/MM/yyyy HH:mm";
-	private LocalDateTime fechaHora;
+	private java.sql.Timestamp fechaHora;
 	
 	/**
 	 * Crea una FechaHora con la fecha y hora actuales
 	 */
 	public FechaHora() {
-		this.fechaHora = Instant.ofEpochMilli(new Date().getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		this.fechaHora = java.sql.Timestamp.valueOf((Instant.ofEpochMilli(new Date().getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime()));
 	}
 	
 	/**
@@ -27,7 +27,7 @@ public class FechaHora implements Comparable<FechaHora> {
 	public FechaHora(String fechaHora) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat(FORMATOFECHAHORA);
 		Date fechaTemp = sdf.parse(fechaHora);
-		this.fechaHora = Instant.ofEpochMilli(fechaTemp.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		this.fechaHora = java.sql.Timestamp.valueOf(Instant.ofEpochMilli(fechaTemp.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime());
 	}
 	
 	public String toString() {
@@ -36,19 +36,11 @@ public class FechaHora implements Comparable<FechaHora> {
 	}
 	
 	public boolean antes(FechaHora otraFechaHora) {
-		Date fecha, otraFecha;
-		fecha = Date.from(this.fechaHora.atZone(ZoneId.systemDefault()).toInstant());
-		otraFecha = Date.from(otraFechaHora.fechaHora.atZone(ZoneId.systemDefault()).toInstant());
-		
-		return fecha.before(otraFecha);
+		return this.fechaHora.before(otraFechaHora.fechaHora);
 	}
 	
 	public boolean despues(FechaHora otraFechaHora) {
-		Date fecha, otraFecha;
-		fecha = Date.from(this.fechaHora.atZone(ZoneId.systemDefault()).toInstant());
-		otraFecha = Date.from(otraFechaHora.fechaHora.atZone(ZoneId.systemDefault()).toInstant());
-		
-		return fecha.after(otraFecha);
+		return this.fechaHora.after(otraFechaHora.fechaHora);
 	}
 
 	@Override

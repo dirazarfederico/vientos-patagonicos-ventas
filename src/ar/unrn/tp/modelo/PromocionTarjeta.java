@@ -12,4 +12,10 @@ public class PromocionTarjeta extends Promocion {
 			throw new IllegalArgumentException("Se requiere de una tarjeta para dar de alta una promoción de tarjeta");
 		this.tarjeta = tarjeta;
 	}
+
+	@Override
+	public boolean valido(Object o) {
+		TarjetaCredito tarj = (TarjetaCredito) o;
+		return tarj.equals(this.tarjeta);
+	}
 }

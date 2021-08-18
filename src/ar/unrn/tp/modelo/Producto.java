@@ -8,15 +8,15 @@ public class Producto {
 	private long codigo;
 	private String descripcion;
 	private double precio;
-	private Marca marca;
+	private String marca;
 	private String categoria;
 	
-	public Producto(String descripcion, double precio, Marca marca, String categoria) throws EmptyStringException, IllegalNumberException {
+	public Producto(String descripcion, double precio, String marca, String categoria) throws EmptyStringException, IllegalNumberException {
 		if(descripcion==null||descripcion.isEmpty())
 			throw new EmptyStringException("El producto debe tener una descripcion");
 		if(precio<=0.00)
 			throw new IllegalNumberException("El precio no puede ser menor o igual a 0");
-		if(marca==null)
+		if(marca==null||marca.isEmpty())
 			throw new EmptyStringException("El producto debe tener una marca");
 		if(categoria==null||categoria.isEmpty())
 			throw new EmptyStringException("El producto debe tener una categoria");
@@ -38,5 +38,13 @@ public class Producto {
 	
 	public String descripcion() {
 		return this.descripcion;
+	}
+	
+	public String marca() {
+		return this.marca;
+	}
+	
+	public String categoria() {
+		return this.categoria;
 	}
 }

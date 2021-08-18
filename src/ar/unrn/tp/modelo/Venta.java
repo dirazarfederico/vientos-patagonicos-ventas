@@ -17,4 +17,8 @@ public class Venta {
 		this.total = total;
 	}
 	
+	public double total() {
+		return this.total;
+	}
+	
 }

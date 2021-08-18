@@ -19,7 +19,7 @@ public class Cliente {
 			throw new EmptyStringException("Debe ingresar un nombre");
 		if(apellido==null||apellido.isEmpty())
 			throw new EmptyStringException("Debe ingresar un apellido");
-		if(dni<0||dni>99999999)
+		if(dni<10000000||dni>99999999)
 			throw new InvalidIDException("Debe ingresar un dni válido");
 		
 		DireccionEmail direccionEmail = new DireccionEmail(email);

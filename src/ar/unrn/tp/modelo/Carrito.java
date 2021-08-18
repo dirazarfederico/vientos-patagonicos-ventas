@@ -9,8 +9,13 @@ import ar.unrn.tp.excepciones.IllegalNumberException;
 public class Carrito {
 	private HashMap<Producto, Integer> productos;
 	private Cliente cliente;
+	private List<Promocion> promociones;
 	
-	public Carrito() {
+	public Carrito(Cliente cliente, List<Promocion> promos) throws IllegalArgumentException {
+		if(cliente==null)
+			throw new IllegalArgumentException("Debe ingresar un cliente para este carrito");
+		if(promos==null)
+			throw new IllegalArgumentException("Debe ingresar las promociones vigentes");
 		productos = new HashMap<Producto, Integer>();
 	}
 	
@@ -34,11 +39,14 @@ public class Carrito {
 		List<ProductoVendido> productosResultado = new ArrayList<ProductoVendido>();
 		double total = 0;
 		this.productos.forEach((prod, cant) -> {
-			ProductoVendido productoVendido = new ProductoVendido(prod, cant);
+			// Obtener una promoción de la marca de este producto o ninguna promoción.
+			// ¿Cómo filtrar las PromocionMarca de PromocionTarjeta?
+			double monto = 0;
+			ProductoVendido productoVendido = new ProductoVendido(prod, cant, monto);
 			productosResultado.add(productoVendido);
 		});
 		
-		//Calcular descuento con promoción, si es nulo no hay descuento. Por donde llegan las promo??
+		//Al guardar en producto vendido, ya tiene el dcto
 		
 		return new Venta(productosResultado, this.cliente, tarjeta, total);
 	}
