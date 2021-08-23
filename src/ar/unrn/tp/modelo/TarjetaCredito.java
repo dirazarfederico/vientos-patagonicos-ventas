@@ -1,8 +1,18 @@
 package ar.unrn.tp.modelo;
 
-public class TarjetaCredito {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class TarjetaCredito implements IPromocionable {
+	@Id
+	private long id;
 	private long numero;
 	private String empresa;
+
+	protected TarjetaCredito() {
+		
+	}
 	
 	public TarjetaCredito(long numero, String empresa) {
 		this.numero = numero;
@@ -13,10 +23,6 @@ public class TarjetaCredito {
 		return this.empresa;
 	}
 	
-	public boolean mismaEmpresa(TarjetaCredito otraTarjeta) {
-		return this.empresa.equals(otraTarjeta.empresa);
-	}
-	
 	@Override
 	public boolean equals(Object o) {
 		TarjetaCredito otraTarjeta = (TarjetaCredito) o;
@@ -25,5 +31,39 @@ public class TarjetaCredito {
 				return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean esValido(String s) {
+		return false;
+	}
+
+	@Override
+	public boolean esValido(TarjetaCredito t) {
+		return this.empresa.equals(t.empresa);
+	}
+	
+	private long getId() {
+		return id;
+	}
+
+	private void setId(long id) {
+		this.id = id;
+	}
+
+	private long getNumero() {
+		return numero;
+	}
+
+	private void setNumero(long numero) {
+		this.numero = numero;
+	}
+
+	private String getEmpresa() {
+		return empresa;
+	}
+
+	private void setEmpresa(String empresa) {
+		this.empresa = empresa;
 	}
 }

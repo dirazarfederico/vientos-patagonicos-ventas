@@ -3,8 +3,7 @@ package ar.unrn.tp.modelo;
 import ar.unrn.tp.excepciones.EmptyStringException;
 import ar.unrn.tp.excepciones.IllegalNumberException;
 
-public class Producto {
-	private static long ultimoCodigo;
+public class Producto implements IPromocionable {
 	private long codigo;
 	private String descripcion;
 	private double precio;
@@ -20,14 +19,14 @@ public class Producto {
 			throw new EmptyStringException("El producto debe tener una marca");
 		if(categoria==null||categoria.isEmpty())
 			throw new EmptyStringException("El producto debe tener una categoria");
-		
-		this.codigo = ++ultimoCodigo;
+
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.marca = marca;
 		this.categoria = categoria;
 	}
-	
+
+
 	public long codigo() {
 		return this.codigo;
 	}
@@ -46,5 +45,17 @@ public class Producto {
 	
 	public String categoria() {
 		return this.categoria;
+	}
+
+
+	@Override
+	public boolean esValido(String s) {
+		return this.marca.equals(s);
+	}
+
+
+	@Override
+	public boolean esValido(TarjetaCredito t) {
+		return false;
 	}
 }

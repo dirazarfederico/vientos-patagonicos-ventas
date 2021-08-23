@@ -9,13 +9,12 @@ public class PromocionMarca extends Promocion {
 	public PromocionMarca(FechaHora inicio, FechaHora fin, double descuento, String marca) throws DateOverlapException, IllegalArgumentException, IllegalNumberException {
 		super(inicio, fin, descuento);
 		if(marca==null)
-			throw new IllegalArgumentException("Se requiere de una marca para dar de alta una promoción de marca");
+			throw new IllegalArgumentException("Se requiere de una marca para dar de alta una promociï¿½n de marca");
 		this.marca = marca;
 	}
 
 	@Override
-	public boolean valido(Object o) {
-		Producto prod = (Producto) o;
-		return prod.marca().equals(this.marca);
+	public boolean valido(IPromocionable promocionable) {
+		return promocionable.esValido(this.marca);
 	}
 }

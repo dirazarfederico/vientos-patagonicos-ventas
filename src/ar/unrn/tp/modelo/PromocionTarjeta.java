@@ -9,13 +9,12 @@ public class PromocionTarjeta extends Promocion {
 	public PromocionTarjeta(FechaHora inicio, FechaHora fin, double descuento, TarjetaCredito tarjeta) throws DateOverlapException, IllegalNumberException, IllegalArgumentException {
 		super(inicio, fin, descuento);
 		if(tarjeta==null)
-			throw new IllegalArgumentException("Se requiere de una tarjeta para dar de alta una promoción de tarjeta");
+			throw new IllegalArgumentException("Se requiere de una tarjeta para dar de alta una promocion de tarjeta");
 		this.tarjeta = tarjeta;
 	}
 
 	@Override
-	public boolean valido(Object o) {
-		TarjetaCredito tarj = (TarjetaCredito) o;
-		return tarj.equals(this.tarjeta);
+	public boolean valido(IPromocionable promocionable) {
+		return promocionable.esValido(this.tarjeta);
 	}
 }

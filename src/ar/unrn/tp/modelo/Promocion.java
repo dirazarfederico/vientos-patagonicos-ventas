@@ -10,14 +10,15 @@ public abstract class Promocion {
 	
 	public Promocion(FechaHora inicio, FechaHora fin, double descuento) throws DateOverlapException, IllegalNumberException {
 		if(inicio.despues(fin))
-			throw new DateOverlapException("La fecha de inicio de promoción no puede ser posterior a la fecha de finalización");
+			throw new DateOverlapException("La fecha de inicio de promocion no puede ser posterior a la fecha de finalizacion");
 		if(inicio.equals(fin))
-			throw new DateOverlapException("Las fechas de inicio y fin de una promoción no pueden ser iguales");
+			throw new DateOverlapException("Las fechas de inicio y fin de una promocion no pueden ser iguales");
 		if(descuento<0.01)
 			throw new IllegalNumberException("El descuento debe ser mayor a 0");
 		
 		this.fechaInicio = inicio;
 		this.fechaFin = fin;
+		this.descuento = descuento;
 	}
 	
 	public boolean vigente() {
@@ -25,10 +26,10 @@ public abstract class Promocion {
 		return hoy.despues(fechaInicio) && hoy.antes(fechaFin);
 	}
 	
-	public abstract boolean valido(Object o);
+	public abstract boolean valido(IPromocionable promocionable);
 	
-	public double calcularDescuento(Object o, double monto) {
-		return vigente() && valido(o) ? monto * descuento : monto;
+	public double calcularDescuento(IPromocionable promocionable, double monto) {
+		return vigente() && valido(promocionable) ? monto * (1 - descuento) : monto;
 	}
 
 }

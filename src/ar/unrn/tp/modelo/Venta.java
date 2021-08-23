@@ -21,4 +21,18 @@ public class Venta {
 		return this.total;
 	}
 	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(this.cliente);
+		sb.append(" ");
+		sb.append(this.fechaHora);
+		sb.append(" ");
+		sb.append(this.tarjeta.empresa());
+		sb.append(" ");
+		sb.append(this.total);
+		sb.append(" ");
+		sb.append(this.detalle);
+		return sb.toString();
+	}
+	
 }
