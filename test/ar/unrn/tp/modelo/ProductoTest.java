@@ -12,7 +12,9 @@ public class ProductoTest {
 	public void productoSinMarca( ) {
 		
 		Assert.assertThrows(EmptyStringException.class, () -> {
-			Producto producto = new Producto("Auriculares Samsung", 300.5, null, "Electronica");
+			Categoria categoria = new Categoria("Electrónica");
+			
+			Producto producto = new Producto("Auriculares Samsung", 300.5, null, categoria);
 		});
 		
 	}
@@ -21,7 +23,9 @@ public class ProductoTest {
 	public void productoMarcaVacia( ) {
 		
 		Assert.assertThrows(EmptyStringException.class, () -> {
-			Producto producto = new Producto("Auriculares Samsung", 300.5, "", "Electronica");
+			Categoria categoria = new Categoria("Electrónica");
+			
+			Producto producto = new Producto("Auriculares Samsung", 300.5, "", categoria);
 		});
 		
 	}
@@ -39,7 +43,9 @@ public class ProductoTest {
 	public void productoCategoriaVacia( ) {
 		
 		Assert.assertThrows(EmptyStringException.class, () -> {
-			Producto producto = new Producto("Auriculares Samsung", 300.5, "Samsung", "");
+			Categoria categoria = new Categoria("");
+			
+			Producto producto = new Producto("Auriculares Samsung", 300.5, "Samsung", categoria);
 		});
 		
 	}
@@ -48,7 +54,9 @@ public class ProductoTest {
 	public void productoSinPrecio( ) {
 		
 		Assert.assertThrows(IllegalNumberException.class, () -> {
-			Producto producto = new Producto("Auriculares Samsung", 0, "Samsung", "Electronica");
+			Categoria categoria = new Categoria("Electrónica");
+			
+			Producto producto = new Producto("Auriculares Samsung", 0, "Samsung", categoria);
 		});
 		
 	}
@@ -57,7 +65,9 @@ public class ProductoTest {
 	public void productoPrecioNegativo( ) {
 		
 		Assert.assertThrows(IllegalNumberException.class, () -> {
-			Producto producto = new Producto("Auriculares Samsung", -1, "Samsung", "Electronica");
+			Categoria categoria = new Categoria("Electrónica");
+			
+			Producto producto = new Producto("Auriculares Samsung", -300.5, "Samsung", categoria);
 		});
 		
 	}

@@ -11,18 +11,19 @@ import ar.unrn.tp.excepciones.DateOverlapException;
 import ar.unrn.tp.excepciones.EmptyStringException;
 import ar.unrn.tp.excepciones.IllegalNumberException;
 import ar.unrn.tp.excepciones.InvalidEmailException;
-import ar.unrn.tp.excepciones.InvalidIDException;
 
 public class VentaTest {
 
 	@Test
-	public void creacionVenta() throws EmptyStringException, InvalidIDException, InvalidEmailException, IllegalNumberException, ParseException, IllegalArgumentException, DateOverlapException {
+	public void creacionVenta() throws EmptyStringException, InvalidEmailException, IllegalNumberException, ParseException, IllegalArgumentException, DateOverlapException {
 		
 		Cliente cliente = new Cliente("Alfonso", "Ramirez", 39864572, "a.ramirez@gmail.com");
 		
 		String marca = "Samsung", empresa = "MemeCard";
 		
-		Producto producto = new Producto("Auriculares Samsung", 300.5, marca, "Electronica");
+		Categoria categoria = new Categoria("Electrónica");
+		
+		Producto producto = new Producto("Auriculares Samsung", 300.5, marca, categoria);
 		
 		TarjetaCredito tarjeta = new TarjetaCredito(2483186648464L, empresa);
 		
@@ -37,7 +38,7 @@ public class VentaTest {
 		
 		FechaHora hoy = new FechaHora();
 		
-		promo1 = new PromocionTarjeta(inicio, fin, 0.08, tarjeta);
+		promo1 = new PromocionTarjeta(inicio, fin, 0.08, empresa);
 		
 		promo2 = new PromocionMarca(inicio, fin, 0.05, marca);
 		
@@ -56,7 +57,6 @@ public class VentaTest {
 		Venta venta = carrito.efectuarVenta(tarjeta);
 		
 		Assert.assertNotNull("Hola venta", venta);
-		
 	}
 	
 }

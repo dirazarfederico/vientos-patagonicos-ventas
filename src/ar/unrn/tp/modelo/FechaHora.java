@@ -4,9 +4,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.zone.ZoneOffsetTransitionRule;
 import java.util.Date;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class FechaHora implements Comparable<FechaHora> {
 	private static final String FORMATOFECHA = "dd/MM/yyyy";
 	private static final String FORMATOFECHAHORA = "dd/MM/yyyy HH:mm";
@@ -30,8 +36,12 @@ public class FechaHora implements Comparable<FechaHora> {
 		this.fechaHora = java.sql.Timestamp.valueOf(Instant.ofEpochMilli(fechaTemp.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime());
 	}
 	
+	public FechaHora(LocalDateTime fechaHora) {
+		this.fechaHora = java.sql.Timestamp.from(fechaHora.toInstant(OffsetDateTime.now().getOffset()));
+	}
+	
 	public String toString() {
-		SimpleDateFormat sdf = new SimpleDateFormat(FORMATOFECHA);
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATOFECHAHORA);
 		return sdf.format(fechaHora);
 	}
 	
@@ -53,4 +63,14 @@ public class FechaHora implements Comparable<FechaHora> {
 		else
 			return 0;
 	}
+
+	private java.sql.Timestamp getFechaHora() {
+		return fechaHora;
+	}
+
+	private void setFechaHora(java.sql.Timestamp fechaHora) {
+		this.fechaHora = fechaHora;
+	}
+	
+	
 }

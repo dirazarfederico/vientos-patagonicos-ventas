@@ -3,6 +3,7 @@ package ar.unrn.tp.api;
 import java.util.List;
 
 import ar.unrn.tp.modelo.Producto;
+import ar.unrn.tp.modelo.Venta;
 
 public interface VentaService {
 
@@ -10,7 +11,7 @@ public interface VentaService {
 	 * Crea una venta. El monto se calcula aplicando los descuentos a la fecha
 	 * validaciones:
 	 * debe ser un cliente existente
-	 * la lista de productos no debe estar vacía
+	 * la lista de productos no debe estar vacï¿½a
 	 * la tarjeta debe pertenecer al cliente
 	 * @param idCliente
 	 * @param productos
@@ -20,8 +21,8 @@ public interface VentaService {
 	void realizarVenta(Long idCliente, List<Producto> productos, Long idTarjeta);
 	
 	/**
-	 * Devuelve el monto total aplicando los descuentos al día de la fecha
-	 * validar que no llegue una lista vacía y la tarjeta exista
+	 * Devuelve el monto total aplicando los descuentos al dï¿½a de la fecha
+	 * validar que no llegue una lista vacï¿½a y la tarjeta exista
 	 * @param productos
 	 * @param idTarjeta
 	 * @return
@@ -31,5 +32,5 @@ public interface VentaService {
 	  * Devuelve todas las ventas realizadas
 	  * @return
 	  */
-	 List<Producto> ventas(); 
+	 List<Venta> ventas(); 
 }

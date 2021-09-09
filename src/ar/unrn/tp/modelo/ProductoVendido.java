@@ -1,10 +1,17 @@
 package ar.unrn.tp.modelo;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class ProductoVendido {
 	private long codigoProducto;
 	private double precioProducto;
 	private String descripcionProducto;
 	private int cantidad;
+	
+	protected ProductoVendido() {
+		
+	}
 	
 	public ProductoVendido(Producto prod, int cant, double precio) {
 		this.precioProducto = precio;
@@ -36,4 +43,38 @@ public class ProductoVendido {
 		sb.append(this.cantidad);
 		return sb.toString();
 	}
+
+	private long getCodigoProducto() {
+		return codigoProducto;
+	}
+
+	private void setCodigoProducto(long codigoProducto) {
+		this.codigoProducto = codigoProducto;
+	}
+
+	private double getPrecioProducto() {
+		return precioProducto;
+	}
+
+	private void setPrecioProducto(double precioProducto) {
+		this.precioProducto = precioProducto;
+	}
+
+	private String getDescripcionProducto() {
+		return descripcionProducto;
+	}
+
+	private void setDescripcionProducto(String descripcionProducto) {
+		this.descripcionProducto = descripcionProducto;
+	}
+
+	private int getCantidad() {
+		return cantidad;
+	}
+
+	private void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+	
+	
 }

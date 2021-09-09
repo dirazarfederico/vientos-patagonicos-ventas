@@ -1,11 +1,15 @@
 package ar.unrn.tp.modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import ar.unrn.tp.excepciones.EmptyStringException;
+import ar.unrn.tp.excepciones.IllegalNumberException;
 
 @Entity
 public class TarjetaCredito implements IPromocionable {
-	@Id
+	@Id @GeneratedValue
 	private long id;
 	private long numero;
 	private String empresa;
@@ -14,7 +18,11 @@ public class TarjetaCredito implements IPromocionable {
 		
 	}
 	
-	public TarjetaCredito(long numero, String empresa) {
+	public TarjetaCredito(long numero, String empresa) throws IllegalNumberException, EmptyStringException {
+		if(numero<=0)
+			throw new IllegalNumberException("Se debe ingresar un número para la tarjeta");
+		if(empresa==null||empresa.isEmpty())
+			throw new EmptyStringException("Se debe ingresar la empresa de la tarjeta de crédito");
 		this.numero = numero;
 		this.empresa = empresa;
 	}
@@ -35,20 +43,7 @@ public class TarjetaCredito implements IPromocionable {
 
 	@Override
 	public boolean esValido(String s) {
-		return false;
-	}
-
-	@Override
-	public boolean esValido(TarjetaCredito t) {
-		return this.empresa.equals(t.empresa);
-	}
-	
-	private long getId() {
-		return id;
-	}
-
-	private void setId(long id) {
-		this.id = id;
+		return this.empresa.equals(s);
 	}
 
 	private long getNumero() {
@@ -66,4 +61,14 @@ public class TarjetaCredito implements IPromocionable {
 	private void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
+
+	private long getId() {
+		return id;
+	}
+
+	private void setId(long id) {
+		this.id = id;
+	}
+	
+	
 }

@@ -1,10 +1,17 @@
 package ar.unrn.tp.modelo;
 
+import javax.persistence.Embeddable;
+
 import ar.unrn.tp.excepciones.EmptyStringException;
 
+@Embeddable
 public class DireccionEmail {
 	private String direccion;
 	private static final String[] dominios = {"@gmail.com", "@hotmail.com", "@outlook.com", "@yahoo.com.ar"};
+	
+	protected DireccionEmail() {
+		
+	}
 	
 	public DireccionEmail(String email) throws EmptyStringException {
 		if(email==null||email.isEmpty()) {
@@ -30,7 +37,7 @@ public class DireccionEmail {
 			if(!local.isEmpty())
 				localNoVacio = true;
 			
-			// Verifica que la sección local no tenga dos o más @
+			// Verifica que la secciï¿½n local no tenga dos o mï¿½s @
 			if(this.direccion.substring(0, this.direccion.indexOf('@')).equalsIgnoreCase(local))
 				localUnArroba = true;
 		}
@@ -47,4 +54,18 @@ public class DireccionEmail {
 	public String toString() {
 		return direccion;
 	}
+
+	private String getDireccion() {
+		return direccion;
+	}
+
+	private void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	private static String[] getDominios() {
+		return dominios;
+	}
+	
+	
 }

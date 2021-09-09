@@ -1,6 +1,8 @@
 package ar.unrn.tp.modelo;
 
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -40,7 +42,9 @@ public class PromocionTest {
 		
 		PromocionMarca promoMarca = new PromocionMarca(inicio, fin, 0.05, marca);
 		
-		Producto prod = new Producto("Auriculares", 300, marca, "Electrónica");
+		Categoria categoria = new Categoria("Electrónica");
+		
+		Producto prod = new Producto("Auriculares Samsung", 300, marca, categoria);
 		
 		double descuento = promoMarca.calcularDescuento(prod, prod.precio());
 		
@@ -61,9 +65,11 @@ public class PromocionTest {
 		
 		TarjetaCredito tarjeta = new TarjetaCredito(126762L, empresa);
 		
-		PromocionTarjeta promoTarjeta = new PromocionTarjeta(inicio, fin, 0.08, tarjeta);
+		PromocionTarjeta promoTarjeta = new PromocionTarjeta(inicio, fin, 0.08, empresa);
 		
-		Producto prod = new Producto("Auriculares", 300, "Samsung", "Electrónica");
+		Categoria categoria = new Categoria("Electrónica");
+		
+		Producto prod = new Producto("Auriculares Samsung", 300, "Samsung", categoria);
 		
 		double descuento = promoTarjeta.calcularDescuento(tarjeta, prod.precio());
 		
@@ -73,4 +79,23 @@ public class PromocionTest {
 		Assert.assertArrayEquals(esperado, precio, 0.01);
 		
 	}
+	
+//	@Test
+//	public void promocionTarjetaLocalDate() throws IllegalNumberException, EmptyStringException, IllegalArgumentException, DateOverlapException {
+//		FechaHora inicio, fin;
+//		
+//		LocalDate fechaDesde = LocalDate.of(2021, 8, 30) , fechaHasta = LocalDate.of(2021, 9, 30);
+//		
+//		String marcaTarjeta = "Memecard";
+//		
+//		inicio = new FechaHora(fechaDesde.atTime(LocalTime.MIDNIGHT));
+//		
+//		fin = new FechaHora(fechaHasta.atTime(LocalTime.MAX));
+//
+//		TarjetaCredito tarjeta = new TarjetaCredito(1, marcaTarjeta);
+//		
+//		PromocionTarjeta promoTarjeta = new PromocionTarjeta(inicio, fin, 0.08, tarjeta);
+//		
+//		Assert.assertNotNull(promoTarjeta);
+//	}
 }

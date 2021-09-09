@@ -8,13 +8,13 @@ public interface ProductoService {
 
 	/** 
 	 * Agrega un producto nuevo al sistema
-	 * Validar que sea una categor�a existente y que codigo no se repita
+	 * Validar que sea una categoría existente y que codigo no se repita
 	 * @param codigo (id)
 	 * @param descripcion
 	 * @param precio
 	 * @param IdCategor�a
 	 */
-	void crearProducto(String codigo, String descripcion, float precio, Long IdCategoria);
+	void crearProducto(String codigo, String descripcion, float precio, String marca, Long IdCategoria);
 	
 	/**
 	 * Modifica un producto existente
@@ -24,7 +24,7 @@ public interface ProductoService {
 	 * @param precio
 	 * @param IdCategor�a
 	 */
-	void modificarProducto(Long idProducto, String descripcion, float precio, Long IdCategoria);
+	void modificarProducto(Long idProducto, String descripcion, float precio, String marca, Long IdCategoria);
 	
 	 /**
 	  * Devuelve todos los productos

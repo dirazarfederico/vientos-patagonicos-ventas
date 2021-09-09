@@ -20,11 +20,14 @@ public interface ClienteService {
 	 * Verifica que sea un cliente existente
 	 * @param idCliente
 	 * @param nombre
+	 * @param apellido
+	 * @param dni
+	 * @param email
 	 */
-	void modificarCliente(Long idCliente, String nombre, String dni, String email);
+	void modificarCliente(Long idCliente, String nombre, String apellido, String dni, String email);
 	
 	/**
-	 * Agrega una tarjeta de crédito a un cliente del sistema
+	 * Agrega una tarjeta de crï¿½dito a un cliente del sistema
 	 * Valida que sea un cliente existente
 	 * @param idCliente
 	 * @param nro
@@ -33,7 +36,7 @@ public interface ClienteService {
 	void agregarTarjeta(Long idCliente, String nro, String marca);
 
 	 /**
-	  * Devuelve las tarjetas de un cliente específico
+	  * Devuelve las tarjetas de un cliente especï¿½fico
 	  * 
 	  * @param idCliente
 	  * @return
