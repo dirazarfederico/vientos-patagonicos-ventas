@@ -14,7 +14,7 @@ public interface ProductoService {
 	 * @param precio
 	 * @param IdCategor�a
 	 */
-	void crearProducto(String codigo, String descripcion, float precio, String marca, Long IdCategoria);
+	void crearProducto(String codigo, String descripcion, double precio, String marca, Long IdCategoria);
 	
 	/**
 	 * Modifica un producto existente
@@ -24,7 +24,7 @@ public interface ProductoService {
 	 * @param precio
 	 * @param IdCategor�a
 	 */
-	void modificarProducto(Long idProducto, String descripcion, float precio, String marca, Long IdCategoria);
+	void modificarProducto(Long idProducto, String descripcion, double precio, String marca, Long IdCategoria);
 	
 	 /**
 	  * Devuelve todos los productos

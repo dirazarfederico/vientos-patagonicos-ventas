@@ -24,30 +24,78 @@ import ar.unrn.tp.modelo.Categoria;
 import ar.unrn.tp.modelo.Cliente;
 import ar.unrn.tp.modelo.FechaHora;
 import ar.unrn.tp.modelo.Producto;
+import ar.unrn.tp.modelo.PromocionTarjeta;
 import ar.unrn.tp.modelo.TarjetaCredito;
+import ar.unrn.tp.modelo.Venta;
 
 public class Main {
 	
 	public static void main(String[] args) throws ParseException {
 		
 		try {
-//			ClienteService clientes = new JPAObjectDBCliente();
 			
-			ProductoService productos = new JPAObjectDBProducto();
+			String objectdb = "jpa-objectdb", jdbc = "jpa-jdbc";
 			
-			PromocionService promos = new JPAObjectDBPromocion();
+			ClienteService clientes = new JPAObjectDBCliente(jdbc);
 			
+			ProductoService productos = new JPAObjectDBProducto(jdbc);
+//			
+			PromocionService promos = new JPAObjectDBPromocion(jdbc);
+//			
 			LocalDate fechaDesde = LocalDate.now(), fechaHasta = LocalDate.of(2021, 10, 28);
+//			
+			VentaService ventas = new JPAObjectDBVenta(jdbc);
 			
-			VentaService ventas = new JPAObjectDBVenta();
+//			List<Venta> listaVentas= new ArrayList();
+//			listaVentas = ventas.ventas();
+//			
+//			for (Venta v: listaVentas) {
+//				
+//			}
 			
-			List<Producto> listaProductos = new ArrayList<Producto>();
+//			promos.crearDescuento("Logitech", fechaDesde, fechaHasta, 0.05);
 			
-			listaProductos = productos.listarProductos();
+//			promos.crearDescuentoSobreTotal("MemeCard", fechaDesde, fechaHasta, 0.08);
+
+//			productos.crearProducto("1", "Auriculares sin micrófono extendibles USB", 1200, "Logitech", 1L);
 			
-			listaProductos = listaProductos.stream().filter((prod)->prod.codigo()==11).collect(Collectors.toList());
+//			List<Producto> listaProductos = new ArrayList<Producto>();
+//			
+//			listaProductos = productos.listarProductos();
+//			
+//			listaProductos = listaProductos.stream().filter((prod)->prod.codigo()==6).collect(Collectors.toList());
 			
-			ventas.realizarVenta(26L, listaProductos, 27L);
+//			ventas.realizarVenta(7L, listaProductos, 8L);
+//			
+//			List<TarjetaCredito> tarjetas = new ArrayList<TarjetaCredito>();
+//			tarjetas = clientes.listarTarjetas(7L);
+//			
+//			EntityManagerFactory emf = Persistence
+//					.createEntityManagerFactory(jdbc);
+//			EntityManager em = emf.createEntityManager();
+//			EntityTransaction tx = em.getTransaction();
+//			
+//			tx.begin();
+//			
+//			PromocionTarjeta promoTarjeta = em.find(PromocionTarjeta.class, 14L);
+//			
+//			for (TarjetaCredito tarjetaCredito : tarjetas) {
+//				System.out.println(promoTarjeta.mismaEmpresa(tarjetaCredito.empresa()));
+//			}
+////			
+////			Categoria cat1 = new Categoria("Indumentaria");
+////			Categoria cat2 = new Categoria("Muebles");
+////			Categoria cat3 = new Categoria("Herramientas");
+////			Categoria cat4 = new Categoria("Deporte");
+////			Categoria cat5 = new Categoria("Electrónica");
+////			
+////			em.persist(cat1);
+////			em.persist(cat2);
+////			em.persist(cat3);
+////			em.persist(cat4);
+////			em.persist(cat5);
+////			
+//			tx.commit();
 			
 		}
 		catch(Exception e) {

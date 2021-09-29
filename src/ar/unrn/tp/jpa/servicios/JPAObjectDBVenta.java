@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import ar.unrn.tp.api.VentaService;
+import ar.unrn.tp.excepciones.EmptyStringException;
 import ar.unrn.tp.modelo.Carrito;
 import ar.unrn.tp.modelo.Cliente;
 import ar.unrn.tp.modelo.Producto;
@@ -20,10 +21,18 @@ import ar.unrn.tp.modelo.Venta;
 
 public class JPAObjectDBVenta implements VentaService {
 
+	private String contexto;
+	
+	public JPAObjectDBVenta(String nuevoContexto) throws EmptyStringException {
+		if(nuevoContexto==null||nuevoContexto.isEmpty())
+			throw new EmptyStringException("Debe indicar un contexto de persistencia");
+		this.contexto = nuevoContexto;
+	}
+	
 	@Override
 	public void realizarVenta(Long idCliente, List<Producto> productos, Long idTarjeta) {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("jpa-objectdb");
+				.createEntityManagerFactory(contexto);
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -67,9 +76,9 @@ public class JPAObjectDBVenta implements VentaService {
 	}
 
 	@Override
-	public float calcularMonto(List<Producto> productos, Long idTarjeta) {
+	public double calcularMonto(List<Producto> productos, Long idTarjeta) {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("jpa-objectdb");
+				.createEntityManagerFactory(contexto);
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		double total = 0;
@@ -107,13 +116,13 @@ public class JPAObjectDBVenta implements VentaService {
 			if (emf != null)
 				emf.close();
 		}
-		return (float) total;
+		return total;
 	}
 
 	@Override
 	public List<Venta> ventas() {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("jpa-objectdb");
+				.createEntityManagerFactory(contexto);
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		List<Venta> ventas = new ArrayList<Venta>();

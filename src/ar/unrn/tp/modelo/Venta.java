@@ -3,19 +3,28 @@ package ar.unrn.tp.modelo;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import ar.unrn.tp.excepciones.EmptyProductListException;
 
 @Entity
 public class Venta {
 	@Id @GeneratedValue
 	private long id;
+	@ManyToOne
 	private Cliente cliente;
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private FechaHora fechaHora;
 	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "venta_id")
 	private List<ProductoVendido> detalle;
+	@ManyToOne
 	private TarjetaCredito tarjeta;
 	private double total;
 	
@@ -23,8 +32,10 @@ public class Venta {
 		
 	}
 	
-	public Venta(List<ProductoVendido> productos, Cliente cliente, TarjetaCredito tarjeta, double total) {
+	public Venta(List<ProductoVendido> productos, Cliente cliente, TarjetaCredito tarjeta, double total) throws EmptyProductListException {
 		this.cliente = cliente;
+		if(productos.isEmpty())
+			throw new EmptyProductListException("Debe agregar productos al carrito antes de poder comprar.");
 		this.detalle = productos;
 		this.tarjeta = tarjeta;
 		this.fechaHora = new FechaHora();

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import ar.unrn.tp.excepciones.EmptyProductListException;
 import ar.unrn.tp.excepciones.IllegalNumberException;
 
 public class Carrito {
@@ -50,7 +51,7 @@ public class Carrito {
 	}
 	
 	
-	public Venta efectuarVenta(TarjetaCredito tarjeta) {
+	public Venta efectuarVenta(TarjetaCredito tarjeta) throws EmptyProductListException {
 		if(tarjeta==null)
 			throw new IllegalArgumentException("Debe pagar con una tarjeta");
 		

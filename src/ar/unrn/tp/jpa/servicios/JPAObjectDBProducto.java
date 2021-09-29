@@ -10,16 +10,25 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import ar.unrn.tp.api.ProductoService;
+import ar.unrn.tp.excepciones.EmptyStringException;
 import ar.unrn.tp.modelo.Categoria;
 import ar.unrn.tp.modelo.Cliente;
 import ar.unrn.tp.modelo.Producto;
 
 public class JPAObjectDBProducto implements ProductoService {
 
+	private String contexto;
+	
+	public JPAObjectDBProducto(String nuevoContexto) throws EmptyStringException {
+		if(nuevoContexto==null||nuevoContexto.isEmpty())
+			throw new EmptyStringException("Debe indicar un contexto de persistencia");
+		this.contexto = nuevoContexto;
+	}
+	
 	@Override
-	public void crearProducto(String codigo, String descripcion, float precio, String marca, Long idCategoria) {
+	public void crearProducto(String codigo, String descripcion, double precio, String marca, Long idCategoria) {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("jpa-objectdb");
+				.createEntityManagerFactory(contexto);
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -34,14 +43,15 @@ public class JPAObjectDBProducto implements ProductoService {
 			
 			productos = query.getResultList();
 			
-			if(productos.size()==0) {
-				
-				Categoria categoria = em.find(Categoria.class, idCategoria);
-				
-				Producto producto = new Producto(descripcion, precio, marca, categoria);
-				
-				em.persist(producto);
+			if(productos.size()!=0) {
+				throw new RuntimeException("Ya existe un producto con ese código. Contacte a administración.");
 			}
+			
+			Categoria categoria = em.find(Categoria.class, idCategoria);
+			
+			Producto producto = new Producto(descripcion, precio, marca, categoria);
+			
+			em.persist(producto);
 			
 			tx.commit();
 		} catch (Exception e) {
@@ -56,9 +66,9 @@ public class JPAObjectDBProducto implements ProductoService {
 	}
 
 	@Override
-	public void modificarProducto(Long idProducto, String descripcion, float precio, String marca, Long IdCategoria) {
+	public void modificarProducto(Long idProducto, String descripcion, double precio, String marca, Long IdCategoria) {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("jpa-objectdb");
+				.createEntityManagerFactory(contexto);
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -93,7 +103,7 @@ public class JPAObjectDBProducto implements ProductoService {
 	@Override
 	public List<Producto> listarProductos() {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("jpa-objectdb");
+				.createEntityManagerFactory(contexto);
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		

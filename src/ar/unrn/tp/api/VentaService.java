@@ -27,7 +27,7 @@ public interface VentaService {
 	 * @param idTarjeta
 	 * @return
 	 */
-	float calcularMonto(List<Producto> productos, Long idTarjeta);
+	double calcularMonto(List<Producto> productos, Long idTarjeta);
 	 /**
 	  * Devuelve todas las ventas realizadas
 	  * @return

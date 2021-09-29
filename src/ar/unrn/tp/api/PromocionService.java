@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public interface PromocionService {
 
 	/**
-	 * Carga una promoción de tarjeta
+	 * Carga una promociï¿½n de tarjeta
 	 * Validar que las fechas no se superpongan
 	 * @param marcaTarjeta
 	 * @param fechaDesde
@@ -13,10 +13,10 @@ public interface PromocionService {
 	 * @param porcentaje
 	 */
 	void crearDescuentoSobreTotal(String marcaTarjeta, LocalDate fechaDesde,
-	LocalDate fechaHasta, float porcentaje);
+	LocalDate fechaHasta, double porcentaje);
 
 	/**
-	 * Carga una promoción de marca
+	 * Carga una promociï¿½n de marca
 	 * Validar que las fechas no se superpongan
 	 * @param marcaProducto
 	 * @param fechaDesde
@@ -24,7 +24,7 @@ public interface PromocionService {
 	 * @param porcentaje
 	 */
 	void crearDescuento(String marcaProducto, LocalDate fechaDesde, LocalDate
-	fechaHasta, float porcentaje);
+	fechaHasta, double porcentaje);
 
 	
 }

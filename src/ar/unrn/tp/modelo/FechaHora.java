@@ -11,11 +11,17 @@ import java.time.zone.ZoneOffsetTransitionRule;
 import java.util.Date;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-@Embeddable
+@Entity
 public class FechaHora implements Comparable<FechaHora> {
-	private static final String FORMATOFECHA = "dd/MM/yyyy";
-	private static final String FORMATOFECHAHORA = "dd/MM/yyyy HH:mm";
+	@Id
+	@GeneratedValue
+	private long id;
+	private transient static final String FORMATOFECHA = "dd/MM/yyyy";
+	private transient static final String FORMATOFECHAHORA = "dd/MM/yyyy HH:mm";
 	private java.sql.Timestamp fechaHora;
 	
 	/**
@@ -70,6 +76,22 @@ public class FechaHora implements Comparable<FechaHora> {
 
 	private void setFechaHora(java.sql.Timestamp fechaHora) {
 		this.fechaHora = fechaHora;
+	}
+
+	private long getId() {
+		return id;
+	}
+
+	private void setId(long id) {
+		this.id = id;
+	}
+
+	private static String getFormatofecha() {
+		return FORMATOFECHA;
+	}
+
+	private static String getFormatofechahora() {
+		return FORMATOFECHAHORA;
 	}
 	
 	

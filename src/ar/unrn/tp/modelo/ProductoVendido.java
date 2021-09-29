@@ -1,9 +1,16 @@
 package ar.unrn.tp.modelo;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Embeddable
+@Entity
 public class ProductoVendido {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	private long codigoProducto;
 	private double precioProducto;
 	private String descripcionProducto;

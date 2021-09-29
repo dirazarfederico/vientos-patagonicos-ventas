@@ -1,8 +1,12 @@
 package ar.unrn.tp.modelo;
 
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import ar.unrn.tp.excepciones.EmptyStringException;
 import ar.unrn.tp.excepciones.IllegalNumberException;
@@ -10,11 +14,12 @@ import ar.unrn.tp.excepciones.IllegalNumberException;
 @Entity
 public class Producto implements IPromocionable {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long codigo;
 	private String descripcion;
 	private double precio;
 	private String marca;
+	@ManyToOne
 	private Categoria categoria;
 	
 	protected Producto() {
@@ -37,6 +42,9 @@ public class Producto implements IPromocionable {
 		this.categoria = categoria;
 	}
 
+	public Map<String, Object> toMap() {
+		return Map.of("codigo", codigo, "descripcion", descripcion, "precio", precio, "marca", marca, "categoria", categoria);
+	}
 
 	public long codigo() {
 		return this.codigo;

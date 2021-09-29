@@ -1,8 +1,11 @@
 package ar.unrn.tp.modelo;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import ar.unrn.tp.excepciones.DateOverlapException;
 import ar.unrn.tp.excepciones.IllegalNumberException;
@@ -11,7 +14,9 @@ import ar.unrn.tp.excepciones.IllegalNumberException;
 public abstract class Promocion {
 	@Id @GeneratedValue
 	private long id;
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private FechaHora fechaInicio;
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private FechaHora fechaFin;
 	private double descuento;
 	
@@ -75,5 +80,6 @@ public abstract class Promocion {
 		this.descuento = descuento;
 	}
 
+	
 	
 }

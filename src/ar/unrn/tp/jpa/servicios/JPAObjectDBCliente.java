@@ -10,15 +10,24 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import ar.unrn.tp.api.ClienteService;
+import ar.unrn.tp.excepciones.EmptyStringException;
 import ar.unrn.tp.modelo.Cliente;
 import ar.unrn.tp.modelo.TarjetaCredito;
 
 public class JPAObjectDBCliente implements ClienteService {
 
+	private String contexto;
+	
+	public JPAObjectDBCliente(String nuevoContexto) throws EmptyStringException {
+		if(nuevoContexto==null||nuevoContexto.isEmpty())
+			throw new EmptyStringException("Debe indicar un contexto de persistencia");
+		this.contexto = nuevoContexto;
+	}
+	
 	@Override
 	public void crearCliente(String nombre, String apellido, String dni, String email) {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("jpa-objectdb");
+				.createEntityManagerFactory(contexto);
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -55,7 +64,7 @@ public class JPAObjectDBCliente implements ClienteService {
 	@Override
 	public void modificarCliente(Long idCliente, String nombre, String apellido, String dni, String email) {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("jpa-objectdb");
+				.createEntityManagerFactory(contexto);
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -85,7 +94,7 @@ public class JPAObjectDBCliente implements ClienteService {
 	@Override
 	public void agregarTarjeta(Long idCliente, String nro, String marca) {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("jpa-objectdb");
+				.createEntityManagerFactory(contexto);
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -113,7 +122,7 @@ public class JPAObjectDBCliente implements ClienteService {
 	@Override
 	public List<TarjetaCredito> listarTarjetas(Long idCliente) {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("jpa-objectdb");
+				.createEntityManagerFactory(contexto);
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		

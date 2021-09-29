@@ -12,6 +12,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import ar.unrn.tp.api.PromocionService;
+import ar.unrn.tp.excepciones.EmptyStringException;
 import ar.unrn.tp.modelo.FechaHora;
 import ar.unrn.tp.modelo.PromocionMarca;
 import ar.unrn.tp.modelo.PromocionTarjeta;
@@ -19,11 +20,19 @@ import ar.unrn.tp.modelo.TarjetaCredito;
 
 public class JPAObjectDBPromocion implements PromocionService {
 
+	private String contexto;
+	
+	public JPAObjectDBPromocion(String nuevoContexto) throws EmptyStringException {
+		if(nuevoContexto==null||nuevoContexto.isEmpty())
+			throw new EmptyStringException("Debe indicar un contexto de persistencia");
+		this.contexto = nuevoContexto;
+	}
+	
 	@Override
 	public void crearDescuentoSobreTotal(String marcaTarjeta, LocalDate fechaDesde, LocalDate fechaHasta,
-			float porcentaje) {
+			double porcentaje) {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("jpa-objectdb");
+				.createEntityManagerFactory(contexto);
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -52,9 +61,9 @@ public class JPAObjectDBPromocion implements PromocionService {
 	}
 
 	@Override
-	public void crearDescuento(String marcaProducto, LocalDate fechaDesde, LocalDate fechaHasta, float porcentaje) {
+	public void crearDescuento(String marcaProducto, LocalDate fechaDesde, LocalDate fechaHasta, double porcentaje) {
 		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("jpa-objectdb");
+				.createEntityManagerFactory(contexto);
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {

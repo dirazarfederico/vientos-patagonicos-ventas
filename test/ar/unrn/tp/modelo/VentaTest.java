@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import ar.unrn.tp.excepciones.DateOverlapException;
+import ar.unrn.tp.excepciones.EmptyProductListException;
 import ar.unrn.tp.excepciones.EmptyStringException;
 import ar.unrn.tp.excepciones.IllegalNumberException;
 import ar.unrn.tp.excepciones.InvalidEmailException;
@@ -15,7 +16,7 @@ import ar.unrn.tp.excepciones.InvalidEmailException;
 public class VentaTest {
 
 	@Test
-	public void creacionVenta() throws EmptyStringException, InvalidEmailException, IllegalNumberException, ParseException, IllegalArgumentException, DateOverlapException {
+	public void creacionVenta() throws EmptyStringException, InvalidEmailException, IllegalNumberException, ParseException, IllegalArgumentException, DateOverlapException, EmptyProductListException {
 		
 		Cliente cliente = new Cliente("Alfonso", "Ramirez", 39864572, "a.ramirez@gmail.com");
 		
