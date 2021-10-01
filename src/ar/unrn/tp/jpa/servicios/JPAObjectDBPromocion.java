@@ -28,7 +28,6 @@ public class JPAObjectDBPromocion implements PromocionService {
 		this.contexto = nuevoContexto;
 	}
 	
-	@Override
 	public void crearDescuentoSobreTotal(String marcaTarjeta, LocalDate fechaDesde, LocalDate fechaHasta,
 			double porcentaje) {
 		EntityManagerFactory emf = Persistence
@@ -60,7 +59,6 @@ public class JPAObjectDBPromocion implements PromocionService {
 		}
 	}
 
-	@Override
 	public void crearDescuento(String marcaProducto, LocalDate fechaDesde, LocalDate fechaHasta, double porcentaje) {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory(contexto);

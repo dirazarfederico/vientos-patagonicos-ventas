@@ -24,7 +24,6 @@ public class JPAObjectDBCliente implements ClienteService {
 		this.contexto = nuevoContexto;
 	}
 	
-	@Override
 	public void crearCliente(String nombre, String apellido, String dni, String email) {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory(contexto);
@@ -61,7 +60,7 @@ public class JPAObjectDBCliente implements ClienteService {
 				emf.close();
 		}
 	}
-	@Override
+	
 	public void modificarCliente(Long idCliente, String nombre, String apellido, String dni, String email) {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory(contexto);
@@ -91,7 +90,7 @@ public class JPAObjectDBCliente implements ClienteService {
 				emf.close();
 		}
 	}
-	@Override
+	
 	public void agregarTarjeta(Long idCliente, String nro, String marca) {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory(contexto);
@@ -119,7 +118,7 @@ public class JPAObjectDBCliente implements ClienteService {
 				emf.close();
 		}
 	}
-	@Override
+
 	public List<TarjetaCredito> listarTarjetas(Long idCliente) {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory(contexto);

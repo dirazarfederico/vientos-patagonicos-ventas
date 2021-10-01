@@ -29,7 +29,6 @@ public class JPAObjectDBVenta implements VentaService {
 		this.contexto = nuevoContexto;
 	}
 	
-	@Override
 	public void realizarVenta(Long idCliente, List<Producto> productos, Long idTarjeta) {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory(contexto);
@@ -75,7 +74,6 @@ public class JPAObjectDBVenta implements VentaService {
 		}
 	}
 
-	@Override
 	public double calcularMonto(List<Producto> productos, Long idTarjeta) {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory(contexto);
@@ -119,7 +117,6 @@ public class JPAObjectDBVenta implements VentaService {
 		return total;
 	}
 
-	@Override
 	public List<Venta> ventas() {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory(contexto);

@@ -3,8 +3,6 @@ package ar.unrn.tp.web;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.objectdb.o.IXM.a;
-
 import ar.unrn.tp.api.ClienteService;
 import ar.unrn.tp.api.ProductoService;
 import ar.unrn.tp.api.PromocionService;

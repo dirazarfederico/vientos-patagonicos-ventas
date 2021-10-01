@@ -25,7 +25,6 @@ public class JPAObjectDBProducto implements ProductoService {
 		this.contexto = nuevoContexto;
 	}
 	
-	@Override
 	public void crearProducto(String codigo, String descripcion, double precio, String marca, Long idCategoria) {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory(contexto);
@@ -65,7 +64,6 @@ public class JPAObjectDBProducto implements ProductoService {
 		}
 	}
 
-	@Override
 	public void modificarProducto(Long idProducto, String descripcion, double precio, String marca, Long IdCategoria) {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory(contexto);
@@ -100,7 +98,6 @@ public class JPAObjectDBProducto implements ProductoService {
 		}
 	}
 
-	@Override
 	public List<Producto> listarProductos() {
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory(contexto);
