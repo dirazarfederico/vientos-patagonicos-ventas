@@ -27,6 +27,7 @@ import ar.unrn.tp.modelo.Producto;
 import ar.unrn.tp.modelo.PromocionTarjeta;
 import ar.unrn.tp.modelo.TarjetaCredito;
 import ar.unrn.tp.modelo.Venta;
+import ar.unrn.tp.web.WebAPI;
 
 public class Main {
 	
@@ -42,9 +43,13 @@ public class Main {
 //			
 			PromocionService promos = new JPAObjectDBPromocion(jdbc);
 //			
-			LocalDate fechaDesde = LocalDate.now(), fechaHasta = LocalDate.of(2021, 10, 28);
+//			LocalDate fechaDesde = LocalDate.now(), fechaHasta = LocalDate.of(2021, 10, 28);
 //			
 			VentaService ventas = new JPAObjectDBVenta(jdbc);
+			
+			WebAPI api = new WebAPI(clientes, productos, ventas, promos, 7000);
+			
+			api.start();
 			
 //			List<Venta> listaVentas= new ArrayList();
 //			listaVentas = ventas.ventas();
@@ -58,10 +63,21 @@ public class Main {
 //			promos.crearDescuentoSobreTotal("MemeCard", fechaDesde, fechaHasta, 0.08);
 
 //			productos.crearProducto("1", "Auriculares sin micrófono extendibles USB", 1200, "Logitech", 1L);
+//			productos.crearProducto("2", "Jeans azules", 1700, "Levi", 2L);
+//			productos.crearProducto("3", "Escritorio con cajones madera", 8900, "IKEA", 3L);
+//			productos.crearProducto("4", "Pinza ", 800, "Black&Decker", 4L);
+//			productos.crearProducto("5", "Pelota inflable tipo pulpo", 650, "Pulpo", 5L);
+//			productos.crearProducto("6", "Mouse gamer", 1500, "Logitech", 1L);
 			
 //			List<Producto> listaProductos = new ArrayList<Producto>();
-//			
+////			
 //			listaProductos = productos.listarProductos();
+//			
+//			for (Producto producto : listaProductos) {
+//				System.out.println(producto.descripcion());
+//				System.out.println(producto.categoria());
+//				System.out.println();
+//			}
 //			
 //			listaProductos = listaProductos.stream().filter((prod)->prod.codigo()==6).collect(Collectors.toList());
 			

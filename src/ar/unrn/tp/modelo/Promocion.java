@@ -1,5 +1,7 @@
 package ar.unrn.tp.modelo;
 
+import java.util.Map;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -13,12 +15,12 @@ import ar.unrn.tp.excepciones.IllegalNumberException;
 @Entity
 public abstract class Promocion {
 	@Id @GeneratedValue
-	private long id;
+	protected long id;
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	private FechaHora fechaInicio;
+	protected FechaHora fechaInicio;
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	private FechaHora fechaFin;
-	private double descuento;
+	protected FechaHora fechaFin;
+	protected double descuento;
 	
 	protected Promocion() {
 		
@@ -47,6 +49,8 @@ public abstract class Promocion {
 	public double calcularDescuento(IPromocionable promocionable, double monto) {
 		return vigente() && valido(promocionable) ? monto * (1 - descuento) : monto;
 	}
+	
+	public abstract Map<String, Object> toMap();
 
 	private long getId() {
 		return id;

@@ -1,5 +1,7 @@
 package ar.unrn.tp.modelo;
 
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,6 +33,10 @@ public class TarjetaCredito implements IPromocionable {
 	
 	public String empresa() {
 		return this.empresa;
+	}
+	
+	public Map<String, Object> toMap() {
+		return Map.of("id", id, "numero", numero, "empresa", empresa);
 	}
 	
 	@Override

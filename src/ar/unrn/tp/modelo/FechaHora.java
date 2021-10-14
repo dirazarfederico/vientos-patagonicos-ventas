@@ -47,7 +47,7 @@ public class FechaHora implements Comparable<FechaHora> {
 	}
 	
 	public String toString() {
-		SimpleDateFormat sdf = new SimpleDateFormat(FORMATOFECHAHORA);
+		SimpleDateFormat sdf = new SimpleDateFormat(FORMATOFECHA);
 		return sdf.format(fechaHora);
 	}
 	

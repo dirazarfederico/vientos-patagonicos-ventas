@@ -23,6 +23,10 @@ public class Categoria {
 		this.nombre = nombre;
 	}
 	
+	public String toString() {
+		return this.nombre;
+	}
+	
 	private long getId() {
 		return id;
 	}

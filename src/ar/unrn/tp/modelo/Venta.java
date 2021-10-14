@@ -1,10 +1,15 @@
 package ar.unrn.tp.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,7 +26,7 @@ public class Venta {
 	private Cliente cliente;
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private FechaHora fechaHora;
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "venta_id")
 	private List<ProductoVendido> detalle;
 	@ManyToOne
@@ -44,6 +49,16 @@ public class Venta {
 	
 	public double total() {
 		return this.total;
+	}
+	
+	public Map<String, Object> toMap() {
+		List<Map<String, Object>> listaMapas = new ArrayList<Map<String, Object>>();
+		
+		detalle.forEach((prodVendido)-> {
+			listaMapas.add(prodVendido.toMap());
+		});
+		
+		return Map.of("id", id, "fechaHora", fechaHora.toString(), "detalle", Map.of("productosVendidos", listaMapas), "tarjeta", tarjeta.empresa(), "total", total);
 	}
 	
 	public String toString() {

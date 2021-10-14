@@ -1,5 +1,7 @@
 package ar.unrn.tp.modelo;
 
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -38,7 +40,9 @@ public class PromocionTarjeta extends Promocion {
 		this.empresa = empresa;
 	}
 
-	
+	public Map<String, Object> toMap() {
+		return Map.of("id", this.id, "fechaInicio", this.fechaInicio.toString(), "fechaFin", this.fechaFin.toString(), "descuento", this.descuento, "promocionable", this.empresa);
+	}
 	
 	
 }

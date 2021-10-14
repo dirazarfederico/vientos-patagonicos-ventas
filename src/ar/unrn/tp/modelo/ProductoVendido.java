@@ -1,5 +1,7 @@
 package ar.unrn.tp.modelo;
 
+import java.util.Map;
+
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +27,10 @@ public class ProductoVendido {
 		this.codigoProducto = prod.codigo();
 		this.descripcionProducto = prod.descripcion();
 		this.cantidad = cant;
+	}
+	
+	public Map<String, Object> toMap() {
+		return Map.of("id", id, "descripcion", descripcionProducto, "precio", precioProducto);
 	}
 	
 	public double subtotal() {

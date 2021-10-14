@@ -1,6 +1,9 @@
 package ar.unrn.tp.api;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import ar.unrn.tp.modelo.Promocion;
 
 public interface PromocionService {
 
@@ -26,5 +29,17 @@ public interface PromocionService {
 	void crearDescuento(String marcaProducto, LocalDate fechaDesde, LocalDate
 	fechaHasta, double porcentaje);
 
+	/**
+	 * Devuelve todas las promociones
+	 * @return
+	 */
+	List<Promocion> promociones();
+	
+	/**
+	 * Devuelve las promociones vigentes
+	 * @return
+	 */
+	List<Promocion> vigentes();
+	
 	
 }

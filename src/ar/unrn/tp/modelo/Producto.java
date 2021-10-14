@@ -3,9 +3,11 @@ package ar.unrn.tp.modelo;
 import java.util.Map;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import ar.unrn.tp.excepciones.EmptyStringException;
@@ -19,7 +21,8 @@ public class Producto implements IPromocionable {
 	private String descripcion;
 	private double precio;
 	private String marca;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="id_categoria")
 	private Categoria categoria;
 	
 	protected Producto() {
@@ -43,7 +46,7 @@ public class Producto implements IPromocionable {
 	}
 
 	public Map<String, Object> toMap() {
-		return Map.of("codigo", codigo, "descripcion", descripcion, "precio", precio, "marca", marca, "categoria", categoria);
+		return Map.of("codigo", codigo, "descripcion", descripcion, "precio", precio, "marca", marca, "categoria", categoria.toString());
 	}
 
 	public long codigo() {
