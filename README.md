@@ -1,5 +1,3 @@
 # vientos-patagonicos-ventas
-El backend del proyecto vientos patagónicos.
-#Tech Stack
-💾Hibernate
-🌐Javalin
+A Javalin-based e-commerce backend.
+Uses Hibernate as the persistance/ORM.
