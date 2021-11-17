@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 
 import ar.unrn.tp.excepciones.EmptyStringException;
 import ar.unrn.tp.excepciones.IllegalNumberException;
@@ -24,6 +25,8 @@ public class Producto implements IPromocionable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id_categoria")
 	private Categoria categoria;
+	@Version
+	private Long version;
 	
 	protected Producto() {
 		
@@ -46,7 +49,7 @@ public class Producto implements IPromocionable {
 	}
 
 	public Map<String, Object> toMap() {
-		return Map.of("codigo", codigo, "descripcion", descripcion, "precio", precio, "marca", marca, "categoria", categoria.toString());
+		return Map.of("codigo", codigo, "descripcion", descripcion, "precio", precio, "marca", marca, "categoria", categoria.id().toString(), "version", version);
 	}
 
 	public long codigo() {
@@ -67,6 +70,10 @@ public class Producto implements IPromocionable {
 	
 	public Categoria categoria() {
 		return this.categoria;
+	}
+	
+	public Long version() {
+		return this.version;
 	}
 
 	public void cambiarDescripcion(String desc) throws EmptyStringException {
@@ -103,7 +110,7 @@ public class Producto implements IPromocionable {
 	}
 
 
-	private void setCodigo(long codigo) {
+	public void setCodigo(long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -146,6 +153,15 @@ public class Producto implements IPromocionable {
 	private void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	private Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+	
 	
 	
 }

@@ -32,6 +32,8 @@ public class Venta {
 	@ManyToOne
 	private TarjetaCredito tarjeta;
 	private double total;
+	//Sale id for the current year
+	private String yearId;
 	
 	protected Venta() {
 		
@@ -58,7 +60,7 @@ public class Venta {
 			listaMapas.add(prodVendido.toMap());
 		});
 		
-		return Map.of("id", id, "fechaHora", fechaHora.toString(), "detalle", Map.of("productosVendidos", listaMapas), "tarjeta", tarjeta.empresa(), "total", total);
+		return Map.of("id", id, "fechaHora", fechaHora.toString(), "detalle", Map.of("productosVendidos", listaMapas), "tarjeta", tarjeta.empresa(), "total", total, "yearId", yearId);
 	}
 	
 	public String toString() {
@@ -121,6 +123,14 @@ public class Venta {
 
 	private void setId(long id) {
 		this.id = id;
+	}
+
+	private String getYearId() {
+		return yearId;
+	}
+
+	public void setYearId(String yearId) {
+		this.yearId = yearId;
 	}
 	
 	

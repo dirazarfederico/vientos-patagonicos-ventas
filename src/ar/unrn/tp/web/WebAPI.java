@@ -13,6 +13,7 @@ import ar.unrn.tp.excepciones.EmptyProductListException;
 import ar.unrn.tp.excepciones.EmptyStringException;
 import ar.unrn.tp.excepciones.IllegalNumberException;
 import ar.unrn.tp.excepciones.InvalidEmailException;
+import ar.unrn.tp.modelo.Categoria;
 import ar.unrn.tp.modelo.Producto;
 import ar.unrn.tp.modelo.Promocion;
 import ar.unrn.tp.modelo.TarjetaCredito;
@@ -60,8 +61,10 @@ public class WebAPI {
 		app.get("/descuentos", traerDescuentos());
 		app.get("/tarjetas", traerTarjetas());
 		app.get("/ventas", traerVentas());
+		app.get("/update", updateProducto());
 		app.post("/monto", calcularMonto());
 		app.post("/compra", confirmarCompra());
+		app.post("/update", update());
 		
 //		Excepciones del modelo
 //		app.exception(exceptionClass, exceptionHandler)
@@ -190,4 +193,40 @@ public class WebAPI {
 		};
 	}
 	
+	private Handler updateProducto() {
+		return ctx -> {
+			var productos = this.productos.listarProductos();
+			var categorias = this.productos.listarCategorias();
+			
+			var listaCategorias = new ArrayList<Map<String, Object>>();
+			
+			for (Categoria c : categorias) {
+				listaCategorias.add(c.toMap());
+			}
+			
+			Producto p = productos.get(0);
+			
+			ctx.json(Map.of("result", "success", "product", p.toMap(), "classes", listaCategorias));
+		};
+	}
+	
+	private Handler update() {
+		return ctx -> {
+			ProductoDTO dto = ctx.bodyAsClass(ProductoDTO.class);
+			
+			Long idProducto, idCategoria, version;
+			double precio;
+			
+			idProducto = Long.parseLong(dto.getCodigo());
+			idCategoria = Long.parseLong(dto.getCategoria());
+			version = Long.parseLong(dto.getVersion());
+			
+			precio = Double.parseDouble(dto.getPrecio());
+			
+			this.productos.modificarProducto(idProducto, dto.getDescripcion(), precio, dto.getMarca(), idCategoria, version);
+			
+			ctx.json(Map.of("result", "success", "message", "Producto actualizado con éxito"));
+			
+		};
+	}
 }
