@@ -1,5 +1,7 @@
 package ar.unrn.tp.modelo;
 
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,6 +27,14 @@ public class Categoria {
 	
 	public String toString() {
 		return this.nombre;
+	}
+	
+	public Map<String, Object> toMap() {
+		return Map.of("id", id, "name", nombre);
+	}
+	
+	public Long id() {
+		return this.id;
 	}
 	
 	private long getId() {

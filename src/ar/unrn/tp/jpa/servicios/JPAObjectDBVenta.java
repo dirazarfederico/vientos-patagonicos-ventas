@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.LockModeType;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
@@ -13,11 +15,13 @@ import ar.unrn.tp.api.VentaService;
 import ar.unrn.tp.excepciones.EmptyStringException;
 import ar.unrn.tp.modelo.Carrito;
 import ar.unrn.tp.modelo.Cliente;
+import ar.unrn.tp.modelo.FechaHora;
 import ar.unrn.tp.modelo.Producto;
 import ar.unrn.tp.modelo.PromocionMarca;
 import ar.unrn.tp.modelo.PromocionTarjeta;
 import ar.unrn.tp.modelo.TarjetaCredito;
 import ar.unrn.tp.modelo.Venta;
+import ar.unrn.tp.modelo.Number;
 
 public class JPAObjectDBVenta implements VentaService {
 
@@ -60,7 +64,32 @@ public class JPAObjectDBVenta implements VentaService {
 			
 			Venta venta = carrito.efectuarVenta(tarjeta);
 			
+			FechaHora currentDate = new FechaHora();
+			int currentYear = currentDate.getYear();
+			
+			TypedQuery<Number> numberQuery = em.createQuery("select n from Number n where n.year = :year", Number.class);
+			numberQuery.setParameter("year", currentYear);
+			numberQuery.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+			
+			Number number = null;
+			
+			try {
+				number = numberQuery.getSingleResult();
+			}
+			catch(NoResultException nREx) {
+				System.out.println("new number");
+				number = new Number();
+			}
+			
+			venta.setYearId(number.nextYearId());
+			
 			em.persist(venta);
+			
+			System.out.println(number.nextYearId());
+			
+			number.increase();
+			
+			em.persist(number);
 			
 			tx.commit();
 		} catch (Exception e) {

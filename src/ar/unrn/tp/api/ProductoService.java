@@ -2,6 +2,8 @@ package ar.unrn.tp.api;
 
 import java.util.List;
 
+import ar.unrn.tp.excepciones.UpdateException;
+import ar.unrn.tp.modelo.Categoria;
 import ar.unrn.tp.modelo.Producto;
 
 public interface ProductoService {
@@ -18,18 +20,26 @@ public interface ProductoService {
 	
 	/**
 	 * Modifica un producto existente
-	 * Validar que sea un producto existente
+	 * Valida que sea un producto existente
 	 * @param idProducto
 	 * @param descripcion
 	 * @param precio
-	 * @param IdCategor�a
+	 * @param marca
+	 * @param IdCategoria
+	 * @throws UpdateException 
 	 */
-	void modificarProducto(Long idProducto, String descripcion, double precio, String marca, Long IdCategoria);
+	void modificarProducto(Long idProducto, String descripcion, double precio, String marca, Long IdCategoria, Long version) throws UpdateException;
 	
 	 /**
 	  * Devuelve todos los productos
 	  * @return Una lista con todos los productos
 	  */
 	 List<Producto> listarProductos();
+	 
+	 /**
+	  * Devuelve las categorías
+	  * @return Una lista con todas las categorías
+	  */
+	 List<Categoria> listarCategorias();
 	
 }

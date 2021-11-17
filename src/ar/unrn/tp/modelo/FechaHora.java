@@ -6,11 +6,9 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.zone.ZoneOffsetTransitionRule;
+import java.time.temporal.ChronoField;
 import java.util.Date;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -94,5 +92,8 @@ public class FechaHora implements Comparable<FechaHora> {
 		return FORMATOFECHAHORA;
 	}
 	
+	public int getYear() {
+		return fechaHora.toLocalDateTime().get(ChronoField.YEAR);
+	}
 	
 }
